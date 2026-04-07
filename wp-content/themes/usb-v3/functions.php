@@ -1,4 +1,5 @@
 <?php
+// This file is part of the USB Theme 
 $theme_customizer = __DIR__ . '/inc/customizer.php';
 if (is_readable($theme_customizer)) {
     require_once $theme_customizer;

@@ -1,0 +1,7 @@
+<wpml-config>
+ <custom-fields>
+ <custom-field action="translate" style="visual" label="Download">download</custom-field>
+ <custom-field action="translate" style="visual" label="Product Data">productdata_content</custom-field>
+ <custom-field action="translate" style="visual" label="Business Facts">business_facts</custom-field>
+ </custom-fields>
+</wpml-config>

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Helvetica';
+    src: url('Helvetica.eot');
+    src: url('Helvetica.eot?#iefix') format('embedded-opentype'),
+        url('Helvetica.woff2') format('woff2'),
+        url('Helvetica.woff') format('woff'),
+        url('Helvetica.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arial';
+    src: url('ArialMT.eot');
+    src: url('ArialMT.eot?#iefix') format('embedded-opentype'),
+        url('ArialMT.woff2') format('woff2'),
+        url('ArialMT.woff') format('woff'),
+        url('ArialMT.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

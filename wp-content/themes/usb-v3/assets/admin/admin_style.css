@@ -1,0 +1,8 @@
+.wp-admin #toplevel_page_membership-level,
+.wp-admin #toplevel_page_header {
+    display: block !important;
+}
+
+#wpbody p.search-box{
+	display:block !important;
+}

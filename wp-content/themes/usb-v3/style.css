@@ -1,0 +1,74 @@
+/*
+Theme Name: Usb version 3
+Author: Raihan Reza
+Theme URI: https://elvirainfotech.com/
+Tags: Usb
+Version: :Latest Version
+* Text Domain: usb
+*/
+
+.slider-section .owl-nav {display: block !important;}
+/*.cus-margin-btn-warp {
+    display: none !important;
+}*/
+/*.cus-margin label, .cus-margin [type="number"]{*/
+/*     display: none;*/
+/*}*/
+
+div#download p a {
+    color: #fff !important;
+    border-radius: 0px !important;
+    border: 0px;
+    padding: 0px 20px;
+    background: #7092be;
+    display: inline-block;
+}
+
+ul.product-footprint-logos{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+ul.product-footprint-logos li {
+	margin-bottom:10px;
+}
+ul.product-footprint-logos li img{
+	width:90px !important;
+	height:auto;
+}
+
+/* Woocommerce */
+.product-article-no, .custom-price-range{
+	padding:0 10px;
+	margin-bottom:5px;
+}
+
+/* Second image on hover */
+.image-div {
+    position: relative; /* Set relative positioning for the container */
+}
+
+.primary-image {
+    display: block; /* Ensure the primary image is displayed */
+    transition: opacity 0.3s ease; /* Smooth transition for better effect */
+	width:100%;
+}
+
+.secondary-image {
+    position: absolute; /* Position secondary image absolutely within the container */
+    top: 0;
+    left: 0;
+    display: none; /* Initially hide the secondary image */
+    width: 100%; /* Make sure the image fits the container */
+}
+
+.image-div:hover .primary-image {
+    opacity: 0; /* Fade out the primary image on hover */
+}
+
+.image-div:hover .secondary-image {
+    display: block !important; /* Show secondary image on hover */
+    opacity: 1; /* Ensure secondary image is fully visible */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+

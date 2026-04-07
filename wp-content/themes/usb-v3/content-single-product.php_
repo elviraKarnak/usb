@@ -1,0 +1,416 @@
+<?php
+/**
+* The template for displaying product content in the single-product.php template
+* This template can be overridden by copying it to yourtheme/woocommerce/content-single-product.php.
+* HOWEVER, on occasion WooCommerce will need to update template files and you
+* (the theme developer) will need to copy the new files to your theme to
+* maintain compatibility. We try to do this as little as possible, but it does
+* happen. When this occurs the version of the template file will be bumped and
+* the readme will list any important changes.
+*
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     3.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
+/**
+ * Hook Woocommerce_before_single_product.
+ *@hooked wc_print_notices - 10
+ */
+
+do_action( 'woocommerce_before_single_product' );
+
+
+if ( post_password_required() ) {
+	echo get_the_password_form(); // WPCS: XSS ok.
+	return;
+}
+?>
+
+<div class="container product-details">
+	<?php
+
+	// Get parent product categories on single product pages
+	$terms = wp_get_post_terms( get_the_id(), 'product_cat', array( 'include_children' => false ) );
+	$term = reset($terms);
+	$term_link =  get_term_link( $term->term_id, 'product_cat' ); // The link /*href="'.$term_link.'"*/?>
+
+
+
+	<?php echo "<div class='btn-blk'>";
+
+	echo '<h2 class="back_button"><a onclick="history.go(-1);" href="javascript:void(0)"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="back_text">BACK</span></a></h2>';
+	_e('<h4 class="cat_button"><a href="'.$term_link.'"><span class="back_text">Back to overview</span></a></h4>');
+	echo "<div class='clearfix'></div>";
+	echo "</div>";
+	?>
+
+	<div class="row">
+		<div class="col-sm-9 col-xs-9">
+			<div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<?php global $product; $attachment_ids = $product->get_gallery_image_ids(); $attachment_ids_count = count($attachment_ids); ?>
+				<div class="gall-<?php echo $attachment_ids_count;?>">
+					<div class="popular_new_single">
+				<?php $field_id_value_popular = get_post_meta($post->ID, 'field_id_popular', true);
+				if(!empty($field_id_value_popular)){ ?>
+				    <span class="tag-sky">
+				      <label><?php _e( 'Popular', 'usb' );?></label>
+				    </span>
+				<?php } ?>
+
+				<?php $field_id_value_new = get_post_meta($post->ID, 'field_id_new', true);
+				  if(!empty($field_id_value_new)){ ?>
+					    <span class="tag-red">
+					       <label><?php _e( 'New', 'usb' );?></label>
+					    </span>
+				  <?php } ?>
+			</div>
+					<?php
+
+						/**
+						 * Hook: woocommerce_before_single_product_summary.
+						 *@hooked woocommerce_show_product_sale_flash - 10
+						 * @hooked woocommerce_show_product_images - 20
+						 */
+
+						do_action( 'woocommerce_before_single_product_summary' );
+					?>
+
+					<div class="summary entry-summary product-details-right">
+
+						<?php
+
+							/**
+							 * Hook: Woocommerce_single_product_summary.
+							 * @hooked woocommerce_template_single_title - 5
+							 * @hooked woocommerce_template_single_rating - 10
+							 * @hooked woocommerce_template_single_price - 10
+							 * @hooked woocommerce_template_single_excerpt - 20
+							 * @hooked woocommerce_template_single_add_to_cart - 30
+							 * @hooked woocommerce_template_single_meta - 40
+							 * @hooked woocommerce_template_single_sharing - 50
+							 * @hooked WC_Structured_Data::generate_product_data() - 60
+							 */
+
+							do_action( 'woocommerce_single_product_summary' );
+
+						?>
+
+<div class="price_calculation">
+						<?php 
+						do_action( 'usb_show_price_content' );
+						?>
+					</div>
+					</div>
+					
+				</div>
+			</div>	
+		</div>
+		<div class="col-sm-3 third_column">
+			<button class="usb_shop_button no_click"><?php _e('Buy Now','usb');?></button>
+
+			<div id="product_sidebar_download_e" class="product_sidebar_download">
+
+				
+
+	    </div>
+
+		<div class="row">
+			<div class="col-md-12">
+					<?php if(current_user_can('administrator')){
+						$options = array("select","level_1", "level_2", "level_3", "level_4","level_5");
+						if (isset($_GET['user_tier'])) {  
+							$user_tier = $_GET['user_tier'];
+						}else{
+							$user_tier = '';
+						}?>
+
+						<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<?php if(empty($user_tier)):?> Choose User Tier <?php else:?> <?php echo ucfirst(str_replace("_", " ", $user_tier)); ?> <?php endif;?>
+						</button>			  
+
+						<ul class="dropdown-menu">
+							<?php foreach ($options as $option) {?>
+								<?php if( $option=='select'):?>
+									<li><a class="dropdown-item <?php if($user_tier==$option):?> active <?php endif;?>" href="?deafult=<?php echo $option;?>"><?php echo ucfirst(str_replace("_", " ", $option)); ?></a></li>
+								<?php else:?>
+								<li><a class="dropdown-item <?php if($user_tier==$option):?> active <?php endif;?>" href="?user_tier=<?php echo $option;?>"><?php echo ucfirst(str_replace("_", " ", $option)); ?></a></li>
+								<?php endif;?>
+							<?php }?>
+						</ul>
+						</div>
+					<?php }?>
+			</div>
+			<div class="col-md-12">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#price_calculatuion">
+				Price Calculation
+				</button>
+			</div>
+		</div>
+
+
+		<div class="pdp-grey-box product-compliance-icons-container">
+        <div class="pdp-grey-header">
+            ESG Footprint
+        </div>
+        <div class="uxIconWrapper">
+            <div class="first-row">
+
+                <div id="divCO2Icon" class="CO2Icon" style="cursor: pointer;">
+                    <span  class="co2-value"><?php echo get_post_meta(get_the_ID(), 'esg_footprint_product', true)?></span>
+                </div>
+
+                
+            </div>
+            <a href="https://www.amfori.org/" id="ctl00_ctl00_ctl00_SiteContent_SiteContent_SiteContent_uxSingleProductInfo_uxCompliance_aBSCIIcon" class="bscci-icon" target="_blank">
+                <img id="ctl00_ctl00_ctl00_SiteContent_SiteContent_SiteContent_uxSingleProductInfo_uxCompliance_uxBSCIIcon" title="The producing factory of this product is BSCI audited." src="https://elvirainfotech.live/usb/wp-content/uploads/2024/05/BSCI.png" style="border-width:0px;"></a>
+            
+            <div class="bscci-icon-wrapper">
+                
+                
+            </div>
+            <div id="divRCS" class="RCSIcon" style="cursor: pointer;">
+                <img id="ctl00_ctl00_ctl00_SiteContent_SiteContent_SiteContent_uxSingleProductInfo_uxCompliance_uxRCS" title="This product is RCS (Recycled Claim Standard) certified" src="https://elvirainfotech.live/usb/wp-content/uploads/2024/05/RCS.png" style="border-width:0px;">
+            </div>
+            <div id="divRCSClaim" class="RCSClaimIcon" style="cursor: pointer;">                
+                <a href="https://textileexchange.org/recycled-claim-global-recycled-standard/" id="ctl00_ctl00_ctl00_SiteContent_SiteContent_SiteContent_uxSingleProductInfo_uxCompliance_aRCSClaim" target="_blank">
+                    <img id="ctl00_ctl00_ctl00_SiteContent_SiteContent_SiteContent_uxSingleProductInfo_uxCompliance_uxRCSClaim" title="This product is RCS Blended certified" src="https://elvirainfotech.live/usb/wp-content/uploads/2024/05/RCS-Blended.png" style="border-width:0px;">                
+                </a>
+            </div>
+            
+            
+            
+        </div>
+    </div>
+
+	<div class="cus-margin-btn-warp">
+
+		<?php //echo do_shortcode('[usb_pdf pdf_name="Export"]');?>
+
+		<!-- <a class="down_pdf_summary" href="?offerpdf=<?php //echo get_the_ID();?>" target="_blank" data-productId="<?php //echo $id;?>"><?php //_e( 'Offer', 'usb' );?></a> -->
+
+		<a class="dwnpdf" href='?pdf=<?php echo get_the_ID();?>&lang=<?php echo $_GET['lang']?$_GET['lang']:'en';?>' target='_blank'>
+
+		<img src="https://elvirainfotech.live/usb/wp-content/uploads/2024/05/pdf.png" alt="pdf_icon">
+		<?php _e( 'Product PDF', 'usb' );?>
+		
+	</a>
+
+		<?php if(is_user_logged_in()){?>
+
+		<!-- <a class="down_pdf_summary" href="?offerpdf=<?php //echo get_the_ID();?>&lang=<?php //echo $_GET['lang']?$_GET['lang']:'en';?>" target="_blank" data-productId="<?php //echo $id;?>"><?php //_e( 'Offer', 'usb' );?></a> -->
+
+		<?php } ?>
+
+		</div>
+	</div>
+
+	<div class="fullwidth_sec">
+
+		<?php do_action('custom_tab_data');?>
+	</div>
+	<div class="row">
+
+		<div class="summary-cart-section">
+
+		<div class="product-details-left">
+
+		<?php
+
+		/**
+
+		* Hook: woocommerce_template_single_add_to_cart.
+
+		*/
+
+		//do_action( 'cart_dropdown_variation_show_price');
+
+		?>
+
+		</div>
+
+		</div>
+
+		<?php 
+
+        $user = wp_get_current_user();
+
+        $roles = $user->roles;
+
+        
+
+		?>
+
+		<?php if ( is_super_admin() || $roles[0]=='sales-user') { ?>
+
+		<div class="col-sm-12 col-xs-12" style="display:none;">
+
+			<div class="cus-editor" style="float: right;">
+
+				<a href="#divForm" class="cus-editor-btn" id="btnForm">Comment</a>
+
+			</div>
+
+			<div id="divForm" style="display:none">
+
+			    <?php
+
+					$post_id = get_the_ID();
+
+					$content = get_post_meta($post_id,'_usbcomment',true);
+
+					$editor_id = 'usbcomment';
+
+					$settings= array('tinymce'=> false);
+
+					wp_editor( $content, $editor_id, $settings );
+
+				?>
+
+				<button data-cmtid="<?php echo $post_id;?>" class="btn editor-save-btn">Save</button>
+
+			</div>
+
+		</div>
+
+	
+
+		<script type="text/javascript">
+
+			jQuery(document).ready(function(){
+
+				jQuery(function(){
+
+					jQuery("#btnForm").fancybox();
+
+				});
+
+				jQuery(document).on('click','.editor-save-btn',function(){
+
+					var usbcomment = jQuery("#usbcomment").val();
+
+					var post_id = '<?php echo $post_id; ?>';
+
+					// console.log(usbcomment+post_id);
+
+					jQuery.ajax({
+
+						type: "POST",
+
+						data: {action: 'usbcomment',usbcomment:usbcomment,cus_product_id:post_id},
+
+						//url: ajaxVars.ajaxurl,
+
+						url: '<?php echo admin_url( 'admin-ajax.php' );?>',
+
+						success: function(msg){
+
+							if (msg) {
+
+								jQuery(".fancybox-close").trigger('click');
+
+								location.reload();
+
+							}
+
+						}
+
+				    });
+
+				});
+
+			 
+
+			});		 
+
+		</script>
+
+		<?php
+
+		$content= apply_filters('the_content', $content);
+
+		if(!empty($content)){
+
+		?>
+
+		<div class="col-sm-6 col-xs-12 cus_comment_wrap" style="display:none;">
+
+			<?php echo $content; ?>
+
+		</div>
+
+		<?php }} ?>
+
+
+		<div class="col-sm-12 col-xs-12">
+
+			<?php
+
+				/**
+
+				 * Hook: woocommerce_after_single_product_summary.
+
+				 *
+
+				 * @hooked woocommerce_output_product_data_tabs - 10
+
+				 * @hooked woocommerce_upsell_display - 15
+
+				 * @hooked woocommerce_output_related_products - 20
+
+				 */
+
+				do_action( 'woocommerce_after_single_product_summary' );
+
+			?>
+
+		</div>
+
+			
+
+		
+
+	</div>		
+
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="price_calculatuion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Price Calcultor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+   <?php do_action( 'cart_dropdown_variation_show_price');?>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<?php do_action( 'woocommerce_after_single_product' ); ?>
+

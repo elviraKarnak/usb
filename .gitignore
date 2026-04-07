@@ -1,0 +1,73 @@
+# =========================
+# WordPress Core
+# =========================
+/wp-admin/
+/wp-includes/
+
+# Root core files
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/xmlrpc.php
+
+# Keep config
+!wp-config.php
+
+# =========================
+# wp-content handling
+# =========================
+/wp-content/*
+
+# ✅ Allow themes
+!wp-content/themes/
+!wp-content/themes/**
+
+# ✅ Allow plugins (remove if you DON'T want plugins in git)
+!wp-content/plugins/
+!wp-content/plugins/**
+
+# =========================
+# Ignore specific folders (as per your screenshot)
+# =========================
+wp-content/uploads/
+wp-content/backups-dup-pro/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/plugins/
+wp-content/upgrade-temp-backup/
+wp-content/wflogs/
+wp-content/webtoffee_export/
+wp-content/webtoffee_import/
+wp-content/webtoffee_iew_log/
+
+# Optional ignore
+wp-content/languages/
+wp-content/maintenance/
+
+# =========================
+# Logs & system
+# =========================
+*.log
+error_log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Composer
+node_modules/
+vendor/
+
+# Env
+.env

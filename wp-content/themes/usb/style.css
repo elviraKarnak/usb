@@ -1,0 +1,24 @@
+/*
+Theme Name: Usb
+Author: Raihan Reza
+Theme URI: https://elvirainfotech.com/
+Tags: Usb
+Version: :Latest Version
+*/
+
+.slider-section .owl-nav {display: block !important;}
+/*.cus-margin-btn-warp {
+    display: none !important;
+}*/
+/*.cus-margin label, .cus-margin [type="number"]{*/
+/*     display: none;*/
+/*}*/
+
+div#download p a {
+    color: #fff !important;
+    border-radius: 0px !important;
+    border: 0px;
+    padding: 0px 20px;
+    background: #7092be;
+    display: inline-block;
+}

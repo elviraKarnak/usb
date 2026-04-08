@@ -104,7 +104,7 @@ use Dompdf\Options;
    $product_description = get_the_excerpt($offer_post_id);
    $product_thumbnail= get_the_post_thumbnail( $offer_post_id, 'full', array( 'class' => 'alignleft' ) );
    $product = new WC_product($offer_post_id);
-    = get_post_meta( $offer_post_id,'productdata_content', true) ? get_post_meta( $offer_post_id,'productdata_content', true) : '';
+   $custom_product_data = get_post_meta( $offer_post_id,'productdata_content', true) ? get_post_meta( $offer_post_id,'productdata_content', true) : '';
    
    if(!empty($custom_product_data)) {
       $DOM = new DOMDocument();

@@ -943,7 +943,7 @@
             // Temporary debug: do not submit yet
             return false;
 
-             //jQuery(".margin_frm").submit();
+             jQuery(".margin_frm").submit();
          });
 
    

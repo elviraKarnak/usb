@@ -1173,6 +1173,14 @@
       var crncy = ' <?php echo $crncy;?>';
       var qty = jQuery(".optionclick:checked").val();
       var price = jQuery(".optionclick:checked").attr('data-value');
+
+    
+  console.log("checked option count:", jQuery(".optionclick:checked").length);
+  console.log("checked qty:", qty);
+  console.log("checked price:", price);
+  console.log("cus margin current:", jQuery(".cus_margin").val());
+
+
       if(jQuery("#woo_currency").val() == ' Kr') {
             var output = price.split('.')[1];
             var rnd = price.split('.')[0];

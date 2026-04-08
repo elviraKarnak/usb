@@ -916,19 +916,37 @@
     <input type="hidden" value="<?php echo ICL_LANGUAGE_CODE;?>" name="lang" class="lang">   
   </form>
   <script>
-   jQuery(document).ready(function(){
-       jQuery(".down_pdf_summary.marginpdf").click(function(e){
-      //  jQuery(".margin_frm").submit(function(e){
-           e.preventDefault();
-           jQuery(".margin_Qty").val(jQuery(".summary-last-margin .totalpcs span").text());
-           jQuery(".margin_Price").val(jQuery(".summary-last-margin .pricemargin span").text());
-           jQuery(".margin_total").val(jQuery(".summary-last-margin .totalmargin span").text());
-           jQuery(".margin_woo_currency").val(jQuery("#woo_currency").val());
-           jQuery(".margin_percentage").val(jQuery(".cus_margin").val());
-           
-           jQuery(".margin_frm").submit();
-       });
+      jQuery(document).ready(function () {
+         jQuery(".down_pdf_summary.marginpdf").click(function (e) {
+            
+            e.preventDefault();
+
+            var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
+            var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
+            var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
+            var marginWooCurrency = jQuery("#woo_currency").val();
+            var marginPercentage = jQuery(".cus_margin").val();
+
+            jQuery(".margin_Qty").val(marginQty);
+            jQuery(".margin_Price").val(marginPrice);
+            jQuery(".margin_total").val(marginTotal);
+            jQuery(".margin_woo_currency").val(marginWooCurrency);
+            jQuery(".margin_percentage").val(marginPercentage);
+
+            console.log("marginQty:", marginQty);
+            console.log("marginPrice:", marginPrice);
+            console.log("marginTotal:", marginTotal);
+            console.log("marginWooCurrency:", marginWooCurrency);
+            console.log("marginPercentage:", marginPercentage);
+            console.log("margin form data:", jQuery(".margin_frm").serialize());
+
+            // Temporary debug: do not submit yet
+            return false;
+
+            // jQuery(".margin_frm").submit();
+         });
    });
+
   </script>
 
 

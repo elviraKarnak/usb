@@ -582,6 +582,7 @@ function usb_v2_scripts_loader()
     wp_enqueue_script('fancybox-js', get_theme_file_uri('assets/js/jquery.fancybox.js'), array('jquery'), time(), true);
     wp_enqueue_script('select_2_js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js', array('jquery'), time(), true);
     wp_enqueue_script('main_js', get_theme_file_uri('assets/js/main.js'), array('jquery'), time(), true);
+    wp_enqueue_script('usb-helper-js', get_theme_file_uri('assets/js/new-script.js'), array('jquery'), time(), true);
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');

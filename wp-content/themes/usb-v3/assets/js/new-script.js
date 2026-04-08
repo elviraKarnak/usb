@@ -1,43 +1,65 @@
-jQuery(document).on('click', '.down_pdf_summary', function () {
-    var productsummary = jQuery('.standar_product_summary').html();
-    var productID = jQuery(this).data("productid");
+function usbSaveProductSummary(productID) {
+    var productsummary = jQuery('.standar_product_summary').html() || '';
 
-    console.log('test 04112020 test');
+    console.log('pdf summary save start');
+    console.log('productID:', productID);
     console.log(productsummary);
 
-    jQuery.ajax({
+    return jQuery.ajax({
         url: ajaxVars.ajaxurl,
         type: 'POST',
         data: {
             action: 'usb_product_summary',
             summary: productsummary,
             product_id: productID
-        },
-        success: function (res) {
-            console.log(res);
         }
     });
+}
+
+jQuery(document).on('click', '.down_pdf_summary', function (e) {
+    e.preventDefault();
+
+    var $link = jQuery(this);
+    var productID = $link.data('productid');
+    var pdfUrl = $link.attr('href');
+    var target = $link.attr('target');
+    var newWindow = null;
+
+    if (target === '_blank') {
+        newWindow = window.open('', '_blank');
+    }
+
+    usbSaveProductSummary(productID)
+        .done(function (res) {
+            console.log('pdf summary save success:', res);
+            console.log('redirect pdf url:', pdfUrl);
+
+            if (newWindow) {
+                newWindow.location = pdfUrl;
+            } else {
+                window.location.href = pdfUrl;
+            }
+        })
+        .fail(function (xhr, status, error) {
+            console.log('pdf summary save failed:', status, error);
+            console.log(xhr.responseText);
+
+            if (newWindow) {
+                newWindow.close();
+            }
+        });
 });
 
 jQuery(document).on('click', '.optionclick', function () {
     setTimeout(function () {
-        var productsummary = jQuery('.standar_product_summary').html();
         var productID = jQuery(".down_pdf_summary").attr("data-productid");
-
-        console.log('test 04112020 test');
-        console.log(productsummary);
-
-        jQuery.ajax({
-            url: ajaxVars.ajaxurl,
-            type: 'POST',
-            data: {
-                action: 'usb_product_summary',
-                summary: productsummary,
-                product_id: productID
-            },
-            success: function (res) {
-                console.log(res);
-            }
-        });
+        usbSaveProductSummary(productID)
+            .done(function (res) {
+                console.log('option summary save success:', res);
+            })
+            .fail(function (xhr, status, error) {
+                console.log('option summary save failed:', status, error);
+                console.log(xhr.responseText);
+            });
     }, 1000);
 });

@@ -941,9 +941,9 @@
             console.log("margin form data:", jQuery(".margin_frm").serialize());
 
             // Temporary debug: do not submit yet
-            //return false;
+            return false;
 
-             jQuery(".margin_frm").submit();
+             //jQuery(".margin_frm").submit();
          });
 
    

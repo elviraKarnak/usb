@@ -553,6 +553,8 @@ function usb_v2_scripts_loader() {
     }
 
     wp_enqueue_script('jquery-ui-autocomplete');
+
+    wp_enqueue_script( 'usb-helper-js', get_theme_file_uri( 'assets/js/new-script.js' ), array('jquery'), time(), true );
 }
 add_action( 'wp_enqueue_scripts', 'usb_v2_scripts_loader' );
 

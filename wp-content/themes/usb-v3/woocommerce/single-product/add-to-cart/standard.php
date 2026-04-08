@@ -917,65 +917,65 @@
   </form>
   <script>
       jQuery(document).ready(function () {
-         // jQuery(".down_pdf_summary.marginpdf").click(function (e) {
+         jQuery(".down_pdf_summary.marginpdf").click(function (e) {
 
-         //    e.preventDefault();
+            e.preventDefault();
 
-         //    var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
-         //    var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
-         //    var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
-         //    var marginWooCurrency = jQuery("#woo_currency").val();
-         //    var marginPercentage = jQuery(".cus_margin").val();
+            var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
+            var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
+            var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
+            var marginWooCurrency = jQuery("#woo_currency").val();
+            var marginPercentage = jQuery(".cus_margin").val();
 
-         //    jQuery(".margin_Qty").val(marginQty);
-         //    jQuery(".margin_Price").val(marginPrice);
-         //    jQuery(".margin_total").val(marginTotal);
-         //    jQuery(".margin_woo_currency").val(marginWooCurrency);
-         //    jQuery(".margin_percentage").val(marginPercentage);
+            jQuery(".margin_Qty").val(marginQty);
+            jQuery(".margin_Price").val(marginPrice);
+            jQuery(".margin_total").val(marginTotal);
+            jQuery(".margin_woo_currency").val(marginWooCurrency);
+            jQuery(".margin_percentage").val(marginPercentage);
 
-         //    console.log("marginQty:", marginQty);
-         //    console.log("marginPrice:", marginPrice);
-         //    console.log("marginTotal:", marginTotal);
-         //    console.log("marginWooCurrency:", marginWooCurrency);
-         //    console.log("marginPercentage:", marginPercentage);
-         //    console.log("margin form data:", jQuery(".margin_frm").serialize());
+            console.log("marginQty:", marginQty);
+            console.log("marginPrice:", marginPrice);
+            console.log("marginTotal:", marginTotal);
+            console.log("marginWooCurrency:", marginWooCurrency);
+            console.log("marginPercentage:", marginPercentage);
+            console.log("margin form data:", jQuery(".margin_frm").serialize());
 
-         //    // Temporary debug: do not submit yet
-         //    return false;
+            // Temporary debug: do not submit yet
+            //return false;
 
-         //    // jQuery(".margin_frm").submit();
-         // });
+             jQuery(".margin_frm").submit();
+         });
 
    
-               jQuery(".down_pdf_summary.marginpdf").click(function (e) {
-                  e.preventDefault();
+               // jQuery(".down_pdf_summary.marginpdf").click(function (e) {
+               //    e.preventDefault();
 
-                  var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
-                  var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
-                  var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
-                  var marginWooCurrency = jQuery("#woo_currency").val();
-                  var marginPercentage = jQuery(".cus_margin").val();
+               //    var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
+               //    var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
+               //    var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
+               //    var marginWooCurrency = jQuery("#woo_currency").val();
+               //    var marginPercentage = jQuery(".cus_margin").val();
 
-                  console.log("base #price:", jQuery("#price").val());
-                  console.log("base #totalamount:", jQuery("#totalamount").val());
-                  console.log("base margin row html:", jQuery(".summary-last-margin").html());
-                  console.log("summary-last-margin count:", jQuery(".summary-last-margin").length);
+               //    console.log("base #price:", jQuery("#price").val());
+               //    console.log("base #totalamount:", jQuery("#totalamount").val());
+               //    console.log("base margin row html:", jQuery(".summary-last-margin").html());
+               //    console.log("summary-last-margin count:", jQuery(".summary-last-margin").length);
 
-                  jQuery(".margin_Qty").val(marginQty);
-                  jQuery(".margin_Price").val(marginPrice);
-                  jQuery(".margin_total").val(marginTotal);
-                  jQuery(".margin_woo_currency").val(marginWooCurrency);
-                  jQuery(".margin_percentage").val(marginPercentage);
+               //    jQuery(".margin_Qty").val(marginQty);
+               //    jQuery(".margin_Price").val(marginPrice);
+               //    jQuery(".margin_total").val(marginTotal);
+               //    jQuery(".margin_woo_currency").val(marginWooCurrency);
+               //    jQuery(".margin_percentage").val(marginPercentage);
 
-                  console.log("marginQty:", marginQty);
-                  console.log("marginPrice:", marginPrice);
-                  console.log("marginTotal:", marginTotal);
-                  console.log("marginWooCurrency:", marginWooCurrency);
-                  console.log("marginPercentage:", marginPercentage);
-                  console.log("margin form data:", jQuery(".margin_frm").serialize());
+               //    console.log("marginQty:", marginQty);
+               //    console.log("marginPrice:", marginPrice);
+               //    console.log("marginTotal:", marginTotal);
+               //    console.log("marginWooCurrency:", marginWooCurrency);
+               //    console.log("marginPercentage:", marginPercentage);
+               //    console.log("margin form data:", jQuery(".margin_frm").serialize());
 
-                  return false;
-               });
+               //    return false;
+               // });
             });
 
 

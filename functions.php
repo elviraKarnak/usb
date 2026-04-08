@@ -558,7 +558,6 @@ function usb_v2_scripts_loader() {
 }
 add_action( 'wp_enqueue_scripts', 'usb_v2_scripts_loader' );
 
-
  /*** acf page options ***/
    
    if( function_exists('acf_add_options_page') ) {

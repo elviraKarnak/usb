@@ -285,7 +285,7 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
                 $html.= __('Specification', 'usb').':';
               $html.='</h3>';
               $html.='<div class="specification_data_table" style="font-size:8px; line-height:14px;">';
-                $html.= $custom_product_data;
+                $html.=usb_v3_get_pdf_specification_html($post_id);
               $html.='</div>';
             $html.='</td>';
           $html.='</tr>';

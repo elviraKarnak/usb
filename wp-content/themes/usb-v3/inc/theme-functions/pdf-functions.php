@@ -345,7 +345,7 @@ exit();
               }
               $custom_product_data .= '</tr></table>';
             }
-          
+        }
 
           $sku= $product->get_sku();
             $html = '';
@@ -475,9 +475,9 @@ exit();
           $html.='</body>';
           $html.='</html>';
 
-          var_dump($html);
-          die();
-          echo $html; 
+          // var_dump($html);
+          // die();
+          // echo $html; 
           $dompdf = new Dompdf();
           $dompdf->set_option('isRemoteEnabled', TRUE);
           $dompdf->loadHtml($html);
@@ -491,6 +491,6 @@ exit();
           $file_name = time()."-offer.pdf";
           // file_put_contents($file_name, $output);
           // mail('anis.elvirainfotech@gmail.com', 'usb pfd', 'I am send a pdf');
-        }
+        
     exit();
 }

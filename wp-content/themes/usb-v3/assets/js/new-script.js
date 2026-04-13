@@ -92,9 +92,7 @@ function usbSaveProductSummary(productID) {
             var $btn = jQuery(this);
             var href = $btn.attr('href');
             var productID = $btn.data('productid');
-            var target = $btn.attr('target');
             var productSummary = jQuery('.standar_product_summary').html() || '';
-            var newWindow = null;
 
             var isMarginPdf = href.indexOf('marginpdf=') !== -1;
             var isOfferPdf = href.indexOf('offerpdf=') !== -1;
@@ -126,27 +124,24 @@ function usbSaveProductSummary(productID) {
             console.log('margin form serialize:', jQuery('.margin_frm').serialize());
             console.log('================ PDF DEBUG END ==================');
 
-            if (target === '_blank') {
-                newWindow = window.open('', '_blank');
-            }
-
             usbSaveProductSummary(productID)
                 .done(function (res) {
                     console.log('pdf summary save success:', res);
-                    console.log('redirect pdf url:', href);
+                    console.log('download pdf url:', href);
 
-                    if (newWindow) {
-                        newWindow.location = href;
-                    } else {
-                        window.location.href = href;
+                    var iframe = jQuery('#offer_pdf_download_frame');
+
+                    if (!iframe.length) {
+                        iframe = jQuery('<iframe>', {
+                            id: 'offer_pdf_download_frame',
+                            style: 'display:none;'
+                        }).appendTo('body');
                     }
+
+                    iframe.attr('src', href);
                 })
                 .fail(function (xhr, status, error) {
                     console.log('pdf summary save failed:', status, error);
                     console.log(xhr.responseText);
-
-                    if (newWindow) {
-                        newWindow.close();
-                    }
                 });
          });

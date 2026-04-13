@@ -16,47 +16,6 @@ function usbSaveProductSummary(productID) {
     });
 }
 
-function usbGetQueryParam(name) {
-    var match = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : '';
-}
-
-function usbGetCurrentLang() {
-    return usbGetQueryParam('lang') || jQuery('.margin_frm .lang').val() || 'en';
-}
-
-function usbGetCurrentProductId($source) {
-    var productID = $source && $source.data('productid');
-
-    if (!productID) {
-        productID = jQuery('.down_pdf_summary').first().data('productid');
-    }
-
-    if (!productID) {
-        productID = jQuery('#cus_product_id').val();
-    }
-
-    if (!productID && jQuery('.product').length) {
-        var productNodeId = jQuery('.product').first().attr('id') || '';
-        var match = productNodeId.match(/product-(\d+)/);
-        productID = match ? match[1] : '';
-    }
-
-    return productID;
-}
-
-function usbInitDwnPdfLinks() {
-    var productID = usbGetCurrentProductId(jQuery('.dwnpdf').first());
-
-    if (productID) {
-        jQuery('.dwnpdf').attr('href', '?pdf=' + productID + '&lang=' + usbGetCurrentLang());
-    }
-}
-
-jQuery(function () {
-    usbInitDwnPdfLinks();
-});
-
 // jQuery(document).on('click', '.optionclick', function () {
 //     setTimeout(function () {
 //         var productID = jQuery(".down_pdf_summary").attr("data-productid");
@@ -133,41 +92,23 @@ jQuery(function () {
          });
 
 
-    jQuery(document).on('click', '.marginpdf', function (e) {
-        e.preventDefault();
 
-        var $link = jQuery(this);
-        var productID = usbGetCurrentProductId($link);
-        var $form = jQuery('.margin_frm');
+         jQuery(document).on('click', '.marginpdf', function (e) {
+            e.preventDefault();
 
-        if (!$form.length) {
-            window.location.href = $link.attr('href');
-            return;
-        }
+            var $link = jQuery(this);
+            var productID = $link.data('productid');
+            var pdfUrl = $link.attr('href');
 
-        var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
-        var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
-        var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
-        var marginWooCurrency = jQuery("#woo_currency").val();
-        var marginPercentage = jQuery(".cus_margin").val();
+            usbSaveProductSummary(productID)
+                .done(function (res) {
+                    console.log('pdf summary save success:', res);
+                    console.log('redirect pdf url:', pdfUrl);
 
-        $form.find(".margin_Qty").val(marginQty);
-        $form.find(".margin_Price").val(marginPrice);
-        $form.find(".margin_total").val(marginTotal);
-        $form.find(".margin_woo_currency").val(marginWooCurrency);
-        $form.find(".margin_percentage").val(marginPercentage);
-        $form.find("input[name='pdf']").val(productID);
-        $form.find(".lang").val(usbGetCurrentLang());
-
-        console.log("marginQty:", marginQty);
-        console.log("marginPrice:", marginPrice);
-        console.log("marginTotal:", marginTotal);
-        console.log("marginWooCurrency:", marginWooCurrency);
-        console.log("marginPercentage:", marginPercentage);
-        console.log("margin form data:", $form.serialize());
-
-        usbSaveProductSummary(productID)
-            .always(function () {
-                $form.trigger('submit');
-            });
-    });
+                    window.location.href = pdfUrl;
+                })
+                .fail(function (xhr, status, error) {
+                    console.log('pdf summary save failed:', status, error);
+                    console.log(xhr.responseText);
+                });
+        });

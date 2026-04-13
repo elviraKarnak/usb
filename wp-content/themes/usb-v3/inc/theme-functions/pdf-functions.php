@@ -3,6 +3,131 @@
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+if (!function_exists('usb_v3_pdf_value_to_text')) {
+  function usb_v3_pdf_value_to_text($value) {
+    if (is_array($value)) {
+      $items = array();
+      array_walk_recursive($value, function ($item) use (&$items) {
+        if (is_scalar($item) && $item !== '') {
+          $items[] = $item;
+        }
+      });
+
+      return implode(', ', $items);
+    }
+
+    return is_scalar($value) ? (string) $value : '';
+  }
+}
+
+if (!function_exists('usb_v3_get_pdf_specification_html')) {
+  function usb_v3_get_pdf_specification_html($product_id) {
+    if (!function_exists('get_field')) {
+      return '';
+    }
+
+    $acf_fields = array(
+      'co2-eq' => get_field('co2-eq_sp', 'option'),
+      'blank_mark_for_co2-emissions' => get_field('blank_mark_for_co2-emissions', 'option'),
+      '_brand_name' => get_field('brand_name_sp', 'option'),
+      'wireless_charging' => get_field('wireless_charging_sp', 'option'),
+      '_capacity_month' => get_field('capacity_month_sp', 'option'),
+      'inkl_batterier' => get_field('inkl_batterier', 'option'),
+      'number_of_batteries' => get_field('number_of_batteries_sp', 'option'),
+      'battery_type' => get_field('battery_type_sp', 'option'),
+      'batterier_iec-kod' => get_field('batterier_iec-kod_sp', 'option'),
+      'vikt_batterier' => get_field('vikt_batterier_sp', 'option'),
+      'usb_output' => get_field('usb_output_sp', 'option'),
+      'fast_charging' => get_field('fast_charging_sp', 'option'),
+      '_magnetic_wireless_charging' => get_field('magnetic_wireless_charging_sp', 'option'),
+      'charging_capacity_for_laptops' => get_field('charging_capacity_for_laptops_sp', 'option'),
+      'simultaneous_loading_of_number_of_units' => get_field('simultaneous_loading_of_number_of_units_sp', 'option'),
+      'wireless_charging_input' => get_field('wireless_charging_input_sp', 'option'),
+      'continuous_charging' => get_field('continuous_charging_sp', 'option'),
+      'approved_as_hand_luggage' => get_field('approved_as_hand_luggage_sp', 'option'),
+      'charging_indicator' => get_field('charging_indicator_sp', 'option'),
+      'product_category' => get_field('product_category', 'option'),
+      'subcategory' => get_field('subcategory_sp', 'option'),
+      'material' => get_field('material_sp', 'option'),
+      'secondary_material' => get_field('secondary_material_sp', 'option'),
+      'recycled_content' => get_field('recycled_content_sp', 'option'),
+      'wide_product' => get_field('wide_product_sp', 'option'),
+      '_product_length' => get_field('product_length_sp', 'option'),
+      'elevated_product' => get_field('elevated_product_sp', 'option'),
+      'net_weight_of_the_product' => get_field('net_weight_of_the_product_sp', 'option'),
+      'product_gross_weight' => get_field('product_gross_weight_sp', 'option'),
+      '_packaging' => get_field('packaging_sp', 'option'),
+      '_quantity_inner_box' => get_field('quantity_inner_box_sp', 'option'),
+      '_product_box_length' => get_field('product_box_length_sp', 'option'),
+      'wide_product_box' => get_field('wide_product_box_sp', 'option'),
+      'hojd_produktlada' => get_field('hojd_produktlada_sp', 'option'),
+      '_pms_color' => get_field('pms_color_sp', 'option'),
+      'intrastat_code' => get_field('intrastat_code_sp', 'option'),
+      'dangerous_goods_class' => get_field('dangerous_goods_class_sp', 'option'),
+      'ean_country_of_origin' => get_field('ean_country_of_origin_sp', 'option'),
+    );
+
+    $fields_per_column = ceil(count($acf_fields) / 2);
+    $field_chunks = array_chunk($acf_fields, $fields_per_column, true);
+    $columns = array();
+
+    foreach ($field_chunks as $column_index => $column) {
+      $rows = '';
+
+      foreach ($column as $field_name => $label) {
+        $value_display = trim(usb_v3_pdf_value_to_text(get_field($field_name, $product_id)));
+
+        if ($value_display === '') {
+          continue;
+        }
+
+        switch ($field_name) {
+          case 'recycled_content':
+            $value_display .= ' %';
+            break;
+          case 'wide_product':
+          case '_product_length':
+            $value_display .= ' mm';
+            break;
+          case 'product_gross_weight':
+            $value_display .= ' gram';
+            break;
+          case '_quantity_inner_box':
+            $value_display .= ' pcs';
+            break;
+          case '_product_box_length':
+          case 'wide_product_box':
+            $value_display .= ' cm';
+            break;
+        }
+
+        $label = trim(usb_v3_pdf_value_to_text($label));
+        if ($label === '') {
+          $label = ucwords(str_replace(array('_', '-'), ' ', $field_name));
+        }
+
+        $rows .= '<tr>';
+        $rows .= '<td style="font-weight:bold; padding:4px 8px 4px 0; width:45%;">' . esc_html__($label, 'usb-tab') . '</td>';
+        $rows .= '<td style="padding:4px 0;">' . esc_html($value_display) . '</td>';
+        $rows .= '</tr>';
+      }
+
+      if ($rows !== '') {
+        $heading = ($column_index === 0) ? __('Produkt Information', 'usb') : __('Produkt Specifikationer', 'usb');
+        $columns[] = '<td style="vertical-align:top; width:50%; padding:0 15px 0 0;"><h3 style="font-size:14px; margin:0 0 8px 0;">' . esc_html($heading) . '</h3><table style="width:100%; border-collapse:collapse; font-size:11px;">' . $rows . '</table></td>';
+      }
+    }
+
+    if (empty($columns)) {
+      return '';
+    }
+
+    return '<table border="0" cellpadding="0" cellspacing="0" class="main_specification_table" style="width:100%; border-collapse:collapse;">'
+      . '<tr>' . implode('', $columns) . '</tr>'
+      . '</table>';
+  }
+}
+
     
    $post_id= $_GET['pdf'];
    if (isset($post_id)) {  
@@ -309,6 +434,7 @@ exit();
       $product_thumbnail= get_the_post_thumbnail( $offer_post_id, 'full', array( 'class' => 'alignleft' ) );
       $product = new WC_product($offer_post_id);
       $custom_product_data = get_post_meta( $offer_post_id,'productdata_content', true);
+      $pdf_specification_data = usb_v3_get_pdf_specification_html($offer_post_id);
 
     //  echo $product_title;
     //  echo $product_description;
@@ -345,6 +471,9 @@ exit();
               }
               $custom_product_data .= '</tr></table>';
             }
+        }
+        if (empty($pdf_specification_data)) {
+          $pdf_specification_data = $custom_product_data;
         }
 
           $sku= $product->get_sku();
@@ -444,10 +573,12 @@ exit();
                 $html.='<tr style="padding:10px 40px">';
                   $html.='<td style="position: relative;float: left;width: 100%; box-sizing: border-box;padding:20px 35px;" >';
                     $html.='<h3 style="font-family: arial, sans-serif; font-size:15px; line-height:17px; font-weight:bold; text-transform:uppercase; padding:0; margin:0 0 5px 0">';
-                      $html.= __('Specification', 'usb').':';
+                    $html.= __('Specification', 'usb').':';
                     $html.='</h3>';
                     $html.='<div class="specification_data_table" style="font-size:8px; line-height:14px;">';
-                      $html.= $custom_product_data;
+                    if (!empty($pdf_specification_data)) {
+                      $html.= $pdf_specification_data;
+                    }
                     $html.='</div>';
                   $html.='</td>';
                 $html.='</tr>';

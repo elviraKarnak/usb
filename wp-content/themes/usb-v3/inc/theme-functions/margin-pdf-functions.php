@@ -105,6 +105,7 @@ use Dompdf\Options;
    $product_thumbnail= get_the_post_thumbnail( $offer_post_id, 'full', array( 'class' => 'alignleft' ) );
    $product = new WC_product($offer_post_id);
    $custom_product_data = get_post_meta( $offer_post_id,'productdata_content', true) ? get_post_meta( $offer_post_id,'productdata_content', true) : '';
+   $pdf_specification_data = usb_v3_get_pdf_specification_html($offer_post_id);
    
    if(!empty($custom_product_data)) {
       $DOM = new DOMDocument();
@@ -132,6 +133,9 @@ use Dompdf\Options;
           }
           $custom_product_data .= '</tr></table>';
         }
+   }
+   if (empty($pdf_specification_data)) {
+      $pdf_specification_data = $custom_product_data;
    }
    
    $sku= $product->get_sku();
@@ -245,8 +249,8 @@ use Dompdf\Options;
   $html.= __('Specification', 'usb').':';
   $html.='</h3>';
   $html.='<div class="specification_data_table" style="font-size:8px; line-height:14px;">';
-  if (!empty($custom_product_data)) {
-    $html.= $custom_product_data;
+  if (!empty($pdf_specification_data)) {
+    $html.= $pdf_specification_data;
   }
   $html.='</div>';
   $html.='</td>';

@@ -71,19 +71,19 @@ jQuery(document).on('click', '.down_pdf_summary', function (e) {
 });
 
 
-jQuery(document).on('click', '.optionclick', function () {
-    setTimeout(function () {
-        var productID = jQuery(".down_pdf_summary").attr("data-productid");
-        usbSaveProductSummary(productID)
-            .done(function (res) {
-                console.log('option summary save success:', res);
-            })
-            .fail(function (xhr, status, error) {
-                console.log('option summary save failed:', status, error);
-                console.log(xhr.responseText);
-            });
-    }, 1000);
-});
+// jQuery(document).on('click', '.optionclick', function () {
+//     setTimeout(function () {
+//         var productID = jQuery(".down_pdf_summary").attr("data-productid");
+//         usbSaveProductSummary(productID)
+//             .done(function (res) {
+//                 console.log('option summary save success:', res);
+//             })
+//             .fail(function (xhr, status, error) {
+//                 console.log('option summary save failed:', status, error);
+//                 console.log(xhr.responseText);
+//             });
+//     }, 1000);
+// });
 
 
    jQuery(document).on('click', '.down_pdf_summary:not(.marginpdf)', function (e) {

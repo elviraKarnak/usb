@@ -152,17 +152,17 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
     //if(!empty($custom_product_data)){
 
     
-    $DOM->loadHTML(mb_convert_encoding($custom_product_data, 'HTML-ENTITIES', 'UTF-8'));
+    // $DOM->loadHTML(mb_convert_encoding($custom_product_data, 'HTML-ENTITIES', 'UTF-8'));
 
-    $Detail = $DOM->getElementsByTagName('td');
-    $i = 0;
-    $j = 0;
-    foreach($Detail as $sNodeDetail) 
-    {
-      $aDataTableDetailHTML[] = trim($sNodeDetail->textContent);
+    // $Detail = $DOM->getElementsByTagName('td');
+    // $i = 0;
+    // $j = 0;
+    // foreach($Detail as $sNodeDetail) 
+    // {
+    //   $aDataTableDetailHTML[] = trim($sNodeDetail->textContent);
       
-    }
-    
+    // }
+    $aDataTableDetailHTML[] = [];
     $cnt = 1;
     if($aDataTableDetailHTML) {
       $custom_product_data = '<table style="width:60%;"><tr>';

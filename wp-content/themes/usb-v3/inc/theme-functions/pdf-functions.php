@@ -310,15 +310,12 @@ exit();
       $product = new WC_product($offer_post_id);
       $custom_product_data = get_post_meta( $offer_post_id,'productdata_content', true);
 
-     echo $product_title;
-     echo $product_description;
-     echo $product_thumbnail; 
-     var_dump($product);
+    //  echo $product_title;
+    //  echo $product_description;
+    //  echo $product_thumbnail; 
+    //  var_dump($product);
 
-     die();
-
-
-
+    //  die();
 
 
       $DOM = new DOMDocument();
@@ -478,7 +475,7 @@ exit();
           $html.='</body>';
           $html.='</html>';
 
-          echo $html;
+          var_dump($html);
           die();
           echo $html; 
           $dompdf = new Dompdf();

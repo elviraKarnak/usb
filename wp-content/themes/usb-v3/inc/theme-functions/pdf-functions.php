@@ -192,7 +192,7 @@ use Dompdf\Options;
   $html.='</html>';
 //   echo $html;
 // die();
-  // echo $html;
+  echo $html;
   // die();
 
 

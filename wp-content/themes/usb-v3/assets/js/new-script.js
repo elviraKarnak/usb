@@ -50,7 +50,7 @@ jQuery(document).on('click', '.down_pdf_summary', function (e) {
         });
 });
 
-jQuery(document).on('click', '.down_pdf_summary', function (e) {
+jQuery(document).on('click', '.down_pdf_summary.marginpdf', function (e) {
     e.preventDefault();
 
     var $link = jQuery(this);

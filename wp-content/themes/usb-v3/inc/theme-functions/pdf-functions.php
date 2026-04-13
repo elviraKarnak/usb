@@ -229,7 +229,12 @@ exit();
 
 //PDF function for logged in user
   $offer_post_id= $_GET['offerpdf'];
+
   if (isset($offer_post_id)) {  
+
+  echo '<pre>';
+  var_dump($offer_post_id); 
+echo '</pre>';
   $current_lang = $sitepress->get_current_language(); 
   $user_ID = get_current_user_id();
   // $product_sku= get_post_meta($offer_post_id,'_sku',true);

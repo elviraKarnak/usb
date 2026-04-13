@@ -316,8 +316,8 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
       $html.='</table>';
   $html.='</body>';
   $html.='</html>';
-     echo $html;
-    die();
+    //  echo $html;
+    // die();
   // echo $html;
   // die();
 

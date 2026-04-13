@@ -81,7 +81,7 @@ use Dompdf\Options;
                     $html.='</td>';
                   $html.='</tr>';
                 $html.='</tbody>';
-              $thml.='</table>';
+              $html.='</table>';
             $html.='</td>';
           $html.='</tr>';
 

@@ -239,16 +239,17 @@ echo "</div>";
 											<?php //echo do_shortcode('[usb_pdf pdf_name="Export"]'); ?>
 
 											<!-- <a class="down_pdf_summary" href="?offerpdf=<?php //echo $product->get_id(); ?>" target="_blank" data-productId="<?php //echo $id; ?>"><?php //_e( 'Offer', 'usb' ); ?></a> -->
+													<?php
+													$lang = substr(get_locale(), 0, 2);
+													?>
 
-											<a class="dwnpdf"
-												href='?pdf=<?php echo $product->get_id(); ?>&lang=<?php echo $_GET['lang'] ? $_GET['lang'] : 'en'; ?>'
-												target='_blank'>
+													<a class="dwnpdf"
+													href='?pdf=<?php echo $product->get_id(); ?>&lang=<?php echo esc_attr($lang); ?>'
+													target='_blank'>
 
+													<?php echo $product_pdf; ?>
 
-												<?php echo $product_pdf; ?>
-
-											</a>
-
+													</a>
 											<?php if (is_user_logged_in()) { ?>
 
 												<!-- <a class="down_pdf_summary" href="?offerpdf=<?php //echo $product->get_id(); ?>&lang=<?php //echo $_GET['lang']?$_GET['lang']:'en'; ?>" target="_blank" data-productId="<?php //echo $id; ?>"><?php //_e( 'Offer', 'usb' ); ?></a> -->

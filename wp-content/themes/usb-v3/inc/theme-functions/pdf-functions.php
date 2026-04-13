@@ -430,12 +430,12 @@ exit();
         }
 
       
-      $product_title= get_the_title($offer_post_id);
-      $product_description = get_the_excerpt($offer_post_id);
-      $product_thumbnail= get_the_post_thumbnail( $offer_post_id, 'full', array( 'class' => 'alignleft' ) );
-      $product = new WC_product($offer_post_id);
-      $custom_product_data = get_post_meta( $offer_post_id,'productdata_content', true);
-      $pdf_specification_data = usb_v3_get_pdf_specification_html($offer_post_id);
+      $product_title= get_the_title($post_id);
+      $product_description = get_the_excerpt($post_id);
+      $product_thumbnail= get_the_post_thumbnail( $post_id, 'full', array( 'class' => 'alignleft' ) );
+      $product = new WC_product($post_id);
+      $custom_product_data = get_post_meta( $post_id,'productdata_content', true);
+      $pdf_specification_data = usb_v3_get_pdf_specification_html($post_id);
 
     //  echo $product_title;
     //  echo $product_description;

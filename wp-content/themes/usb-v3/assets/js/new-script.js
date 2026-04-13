@@ -133,7 +133,7 @@ jQuery(function () {
          });
 
 
-    jQuery(document).on('click', '.marginpdf:not(.down_pdf_summary)', function (e) {
+    jQuery(document).on('click', '.marginpdf', function (e) {
         e.preventDefault();
 
         var $link = jQuery(this);

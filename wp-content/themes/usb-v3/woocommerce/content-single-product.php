@@ -124,7 +124,7 @@ echo "</div>";
 
 						do_action('woocommerce_before_single_product_summary');
 						?>
-</div>
+					</div>
 						<div class="summary entry-summary product-details-right">
 
 							<?php
@@ -258,13 +258,7 @@ echo "</div>";
 
 										</div>
 									</div>
-
 								</div>
-
-
-
-
-
 							</div>
 
 							<div class="price_calculator_form">
@@ -354,8 +348,7 @@ echo "</div>";
 									});
 								});
 								</script>
-							
-
+						
 						<?php }?>
 
 						</div>
@@ -363,8 +356,6 @@ echo "</div>";
 					</div>
 				</div>
 			</div>
-
-
 
 			<div class="fullwidth_sec">
 

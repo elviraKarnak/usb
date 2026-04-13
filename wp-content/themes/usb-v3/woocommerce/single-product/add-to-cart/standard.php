@@ -895,7 +895,7 @@
                  <!-- <a class="down_pdf_summary" href="?offerpdf=<?php //echo get_the_ID();?>" target="_blank" data-productId="<?php //echo $id;?>"><?php //_e( 'Offer', 'usb' );?></a> -->
                  <!-- <a class="dwnpdf" href='?pdf=<?php //echo get_the_ID();?>&lang=<?php //echo $_GET['lang']?$_GET['lang']:'en';?>' target='_blank'>
                  <?php //_e( 'Export', 'usb' );?></a> -->
-                 <a class="down_pdf_summary marginpdf" href="?marginpdf=<?php echo get_the_ID();?>&lang=<?php echo $_GET['lang']?$_GET['lang']:'en';?>" target="_blank" data-productId="<?php echo $id;?>"><?php _e( 'PDF your margin', 'usb' );?></a>
+                 <a class=" marginpdf" href="?marginpdf=<?php echo get_the_ID();?>&lang=<?php echo $_GET['lang']?$_GET['lang']:'en';?>" target="_blank" data-productId="<?php echo $id;?>"><?php _e( 'PDF your margin', 'usb' );?></a>
 
                  <a class="down_pdf_summary" href="?offerpdf=<?php echo get_the_ID();?>&lang=<?php echo $_GET['lang']?$_GET['lang']:'en';?>" target="_blank" data-productId="<?php echo $id;?>"><?php _e( 'PDF rek prices', 'usb' );?></a>
               </div>

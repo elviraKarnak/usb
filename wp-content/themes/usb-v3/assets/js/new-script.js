@@ -90,3 +90,24 @@ function usbSaveProductSummary(productID) {
                     console.log(xhr.responseText);
                 });
          });
+
+
+    jQuery(document).on('click', '.marginpdf', function (e) {
+        e.preventDefault();
+
+        var $link = jQuery(this);
+        var productID = $link.data('productid');
+        var pdfUrl = $link.attr('href');
+
+        usbSaveProductSummary(productID)
+            .done(function (res) {
+                console.log('pdf summary save success:', res);
+                console.log('redirect pdf url:', pdfUrl);
+
+                window.location.href = pdfUrl;
+            })
+            .fail(function (xhr, status, error) {
+                console.log('pdf summary save failed:', status, error);
+                console.log(xhr.responseText);
+            });
+    });

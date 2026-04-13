@@ -17,6 +17,10 @@ use Dompdf\Options;
    $product_thumbnail= get_the_post_thumbnail( $post_id, 'full', array( 'class' => 'alignleft' ) );
    $product = new WC_product($post_id);
    $custom_product_data = get_post_meta( $post_id,'productdata_content', true);
+    
+   
+
+
     $DOM = new DOMDocument();
     // $DOM->loadHTML($custom_product_data);
     if(!empty($custom_product_data)){
@@ -190,6 +194,20 @@ use Dompdf\Options;
 // die();
   // echo $html;
   // die();
+
+
+   echo '<pre>';
+    var_dump($offer_post_id);
+    var_dump($product_title);
+    var_dump(!empty($product_thumbnail));
+    var_dump(!empty($custom_product_data));
+    var_dump(!empty($summary));
+    die;
+
+
+
+
+
   $dompdf = new Dompdf();
   $dompdf->set_option('isRemoteEnabled', TRUE);
   $dompdf->loadHtml($html);

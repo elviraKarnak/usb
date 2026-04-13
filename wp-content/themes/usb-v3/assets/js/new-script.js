@@ -25,9 +25,9 @@ jQuery(document).on('click', '.down_pdf_summary', function (e) {
     var target = $link.attr('target');
     var newWindow = null;
 
-    if (target === '_blank') {
-        newWindow = window.open('', '_blank');
-    }
+    // if (target === '_blank') {
+    //     newWindow = window.open('', '_blank');
+    // }
 
     usbSaveProductSummary(productID)
         .done(function (res) {

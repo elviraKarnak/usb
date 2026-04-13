@@ -192,20 +192,8 @@ use Dompdf\Options;
   $html.='</html>';
 //   echo $html;
 // die();
-  echo $html;
+  //echo $html;
   // die();
-
-
-   echo '<pre>';
-    var_dump($offer_post_id);
-    var_dump($product_title);
-    var_dump(!empty($product_thumbnail));
-    var_dump(!empty($custom_product_data));
-    var_dump(!empty($summary));
-    die;
-
-
-
 
 
   $dompdf = new Dompdf();
@@ -232,9 +220,7 @@ exit();
 
   if (isset($offer_post_id)) {  
 
-  echo '<pre>';
-  var_dump($offer_post_id); 
-echo '</pre>';
+
   $current_lang = $sitepress->get_current_language(); 
   $user_ID = get_current_user_id();
   // $product_sku= get_post_meta($offer_post_id,'_sku',true);
@@ -480,9 +466,9 @@ echo '</pre>';
       $html.='</body>';
       $html.='</html>';
 
-      // echo $html;
-      // die();
-      //echo $html; 
+      echo $html;
+      die();
+      echo $html; 
       $dompdf = new Dompdf();
       $dompdf->set_option('isRemoteEnabled', TRUE);
       $dompdf->loadHtml($html);

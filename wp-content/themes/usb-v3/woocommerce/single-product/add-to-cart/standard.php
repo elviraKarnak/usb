@@ -946,48 +946,7 @@
              jQuery(".margin_frm").submit();
          });
 
-         jQuery(document).on('click', '.down_pdf_summary', function (e) {
-            e.preventDefault();
-
-            var $btn = jQuery(this);
-            var href = $btn.attr('href');
-            var productID = $btn.data('productid');
-            var productSummary = jQuery('.standar_product_summary').html() || '';
-
-            var isMarginPdf = href.indexOf('marginpdf=') !== -1;
-            var isOfferPdf = href.indexOf('offerpdf=') !== -1;
-
-            var marginQty = jQuery(".summary-last-margin .totalpcs span").text().trim();
-            var marginPrice = jQuery(".summary-last-margin .pricemargin span").text().trim();
-            var marginTotal = jQuery(".summary-last-margin .totalmargin span").text().trim();
-            var marginWooCurrency = jQuery("#woo_currency").val();
-            var marginPercentage = jQuery(".cus_margin").val();
-
-            console.log('================ PDF DEBUG START ================');
-            console.log('button text:', $btn.text().trim());
-            console.log('href:', href);
-            console.log('productID:', productID);
-            console.log('isOfferPdf:', isOfferPdf);
-            console.log('isMarginPdf:', isMarginPdf);
-
-            console.log('summary exists:', !!productSummary);
-            console.log('summary length:', productSummary.length);
-            console.log('summary html:', productSummary);
-
-            console.log('marginQty:', marginQty);
-            console.log('marginPrice:', marginPrice);
-            console.log('marginTotal:', marginTotal);
-            console.log('marginWooCurrency:', marginWooCurrency);
-            console.log('marginPercentage:', marginPercentage);
-
-            console.log('offer request url would be:', href);
-            console.log('margin form serialize:', jQuery('.margin_frm').serialize());
-            console.log('================ PDF DEBUG END ==================');
-
-            return false;
-         });
-
-
+   
    
                // jQuery(".down_pdf_summary.marginpdf").click(function (e) {
                //    e.preventDefault();

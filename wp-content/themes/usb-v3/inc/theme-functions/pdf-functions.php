@@ -1,5 +1,6 @@
 <?php
     require_once( get_template_directory() . '/inc/theme-functions/dompdf2/vendor/autoload.php' );
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -129,9 +130,12 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
 }
 
     
-   $post_id= $_GET['pdf'];
+   $post_id = $_GET['pdf'];
+
    if (isset($post_id)) {  
    $current_lang = $sitepress->get_current_language();
+
+   var_dump($post_id);
   
  
    $product_title= get_the_title($post_id);
@@ -143,9 +147,6 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
    $product = new WC_product($post_id);
    $custom_product_data = get_post_meta( $post_id,'productdata_content', true);
     
-   
-
-
     $DOM = new DOMDocument();
     // $DOM->loadHTML($custom_product_data);
     if(!empty($custom_product_data)){
@@ -336,7 +337,7 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
 
 exit();
 }
-   }else{
+   } else {
     
    }
 

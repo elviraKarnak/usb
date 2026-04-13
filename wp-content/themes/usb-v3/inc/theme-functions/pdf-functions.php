@@ -149,7 +149,7 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
     
     $DOM = new DOMDocument();
     // $DOM->loadHTML($custom_product_data);
-    if(!empty($custom_product_data)){
+    //if(!empty($custom_product_data)){
 
     
     $DOM->loadHTML(mb_convert_encoding($custom_product_data, 'HTML-ENTITIES', 'UTF-8'));
@@ -316,8 +316,8 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
       $html.='</table>';
   $html.='</body>';
   $html.='</html>';
-      echo $html;
-    die();
+     // echo $html;
+    //die();
   // echo $html;
   // die();
 
@@ -336,7 +336,7 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
   //$dompdf->stream("test.pdf", array("Attachment" => false));
 
 exit();
-}
+//}
    } else {
     
    }

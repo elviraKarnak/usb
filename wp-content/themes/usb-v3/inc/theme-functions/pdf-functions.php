@@ -135,7 +135,7 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
    if (isset($post_id)) {  
    $current_lang = $sitepress->get_current_language();
 
-   var_dump($post_id);
+   //var_dump($post_id);
   
  
    $product_title= get_the_title($post_id);
@@ -316,9 +316,9 @@ if (!function_exists('usb_v3_get_pdf_specification_html')) {
       $html.='</table>';
   $html.='</body>';
   $html.='</html>';
-//   echo $html;
-// die();
-  //echo $html;
+      echo $html;
+    die();
+  // echo $html;
   // die();
 
 

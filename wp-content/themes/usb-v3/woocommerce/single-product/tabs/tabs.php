@@ -74,7 +74,7 @@ $product_image_chk = get_post_meta($post->ID, '_product_image_chk', true);
 <div class="accordion accordion-flush single-page-description-accordion" id="producttabcontent">
 
 
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-item-esg">
     <h2 class="accordion-header" id="flush-heading5">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#flush-collapse5" aria-expanded="false"
@@ -1137,6 +1137,15 @@ $counter++;
 */ ?>
 
 <script type="text/javascript">
+  jQuery(document).ready(function () {
+    var $esgTab = jQuery('#accordion-item-esg');
+    var $specificationTab = jQuery('#flush-headingOne').closest('.accordion-item');
+
+    if ($esgTab.length && $specificationTab.length) {
+      $esgTab.insertAfter($specificationTab);
+    }
+  });
+
   jQuery("body").on("click", "ul.ei-nav li a", function () {
     var href = jQuery(this).attr('href');
     jQuery('.tab-content .tab-pane').removeClass('show')
